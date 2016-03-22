@@ -11,7 +11,8 @@ module.exports = function bufferActions (breaker, cb) {
     }
   }
 
-  return next => action => {
+  return store => next => action => {
+    // console.log('next', next, action)
     if (!active) return next(action)
     if (breaker(action)) {
       active = false
