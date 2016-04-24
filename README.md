@@ -16,7 +16,7 @@ let actionBuffer = createActionBuffer(
 )
 ```
 
-**Redux Persist Example:**
+#### Redux Persist Example
 ```js
 import {REHYDRATE} from 'redux-persist/constants'
 import createActionBuffer from 'redux-action-buffer'
