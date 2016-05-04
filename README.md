@@ -23,7 +23,7 @@ import createActionBuffer from 'redux-action-buffer'
 import { createStore, compose } from 'redux'
 
 let enhancer = compose(
-  autoRehydrate,
+  autoRehydrate(),
   applyMiddleware(
     createActionBuffer(REHYDRATE) //make sure to apply this after redux-thunk et al.
   )
