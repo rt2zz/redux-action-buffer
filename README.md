@@ -20,6 +20,7 @@ let actionBuffer = createActionBuffer(
 ```js
 import {REHYDRATE} from 'redux-persist/constants'
 import createActionBuffer from 'redux-action-buffer'
+import { createStore, compose } from 'redux'
 
 let enhancer = compose(
   autoRehydrate,
