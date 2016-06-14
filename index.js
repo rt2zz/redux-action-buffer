@@ -11,26 +11,30 @@ module.exports = function bufferActions (breaker, cb) {
     }
   }
 
-  return store => next => action => {
-    // console.log('next', next, action)
-    if (!active) return next(action)
-    if (breaker(action)) {
-      active = false
-      var result = next(action)
-      var queueResults = []
-      queue.forEach(function(queuedAction) {
-        var queuedActionResult = next(queuedAction)
-        queueResults.push(queuedActionResult)
-      })
-      cb && cb(null, {
-        results: queueResults,
-        queue: queue
-      })
-      return result
-    } else {
-      queue.push(action)
-      // @TODO consider returning a dummy action, or maybe null for cleanliness
-      return BUFFERED_ACTION_RETURN
+  return function (store) {
+    return function (next) {
+      return function (action) {
+        // console.log('next', next, action)
+        if (!active) return next(action)
+        if (breaker(action)) {
+          active = false
+          var result = next(action)
+          var queueResults = []
+          queue.forEach(function (queuedAction) {
+            var queuedActionResult = next(queuedAction)
+            queueResults.push(queuedActionResult)
+          })
+          cb && cb(null, {
+            results: queueResults,
+            queue: queue
+          })
+          return result
+        } else {
+          queue.push(action)
+          // @TODO consider returning a dummy action, or maybe null for cleanliness
+          return BUFFERED_ACTION_RETURN
+        }
+      }
     }
   }
 }
