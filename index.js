@@ -3,7 +3,10 @@ var BUFFERED_ACTION_RETURN = 'redux-action-buffer: buffered action'
 module.exports = function bufferActions (breaker, cb) {
   var active = true
   var queue = []
-  if (typeof breaker === 'string') {
+
+  var breakerType = typeof breaker
+
+  if (breakerType === 'string' || breakerType === 'symbol') {
     var actionType = breaker
     breaker = function (action) {
       if (action.type === actionType) return true
