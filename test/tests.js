@@ -40,10 +40,12 @@ test('buffers actions', t => {
   t.same(rB, breaker)
   t.same(r3, action3)
 
-  // history is re-ordered as expected
-  t.is(actionHistory.indexOf(breaker), 0)
-  t.is(actionHistory.indexOf(action1), 1)
-  t.is(actionHistory.indexOf(action2), 2)
-  t.is(actionHistory.indexOf(action3), 3)
-  t.pass()
+  setTimeout(function () {
+    // history is re-ordered as expected
+    t.is(actionHistory.indexOf(breaker), 0)
+    t.is(actionHistory.indexOf(action1), 1)
+    t.is(actionHistory.indexOf(action2), 2)
+    t.is(actionHistory.indexOf(action3), 3)
+    t.pass()
+  }, 1000)
 })

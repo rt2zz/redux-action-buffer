@@ -1,5 +1,7 @@
 var BUFFERED_ACTION_RETURN = 'redux-action-buffer: buffered action'
 
+var setImmediate = typeof global !== 'undefined' && typeof global.setImmediate !== 'undefined' ? global.setImmediate : setTimeout
+
 module.exports = function bufferActions (breaker, cb) {
   var active = true
   var queue = []
@@ -22,14 +24,16 @@ module.exports = function bufferActions (breaker, cb) {
         if (breaker(action)) {
           active = false
           var result = next(action)
-          var queueResults = []
-          queue.forEach(function (queuedAction) {
-            var queuedActionResult = next(queuedAction)
-            queueResults.push(queuedActionResult)
-          })
-          cb && cb(null, {
-            results: queueResults,
-            queue: queue
+          setImmediate(function () {
+            var queueResults = []
+            queue.forEach(function (queuedAction) {
+              var queuedActionResult = next(queuedAction)
+              queueResults.push(queuedActionResult)
+            })
+            cb && cb(null, {
+              results: queueResults,
+              queue: queue
+            })
           })
           return result
         } else {
