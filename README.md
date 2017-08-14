@@ -42,6 +42,6 @@ createStore(
 Delaying actions can be tricky because many actions depend on having a return value, and buffering breaks that. To help catch this scenario the return value from all buffered actions is a string indicating the action has been buffered.
 
 ### API
-actionBuffer(breaker, callback)
-- **breaker** (string | function): Either a action type string that will break the buffer or a function that takes an action as the argument and returns true when the buffer should be broken.
+actionBuffer(options, callback)
+- **options** (string | function | object): Either a action type string that will break the buffer or a function that takes an action as the argument and returns true when the buffer should be broken. An object is interpreted as **{ breaker: (string | function), passthrough: (Array) }** where **breaker** functions as before and **passthrough** is an array of actions not to buffer.
 - **callback** (function): A function that is invoked after the buffer is broken.
