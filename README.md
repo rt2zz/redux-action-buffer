@@ -1,5 +1,3 @@
-**WARNNG** this module is not compatible with redux-persist v5.
-
 ## Redux Action Buffer
 A middleware for [redux](https://github.com/reactjs/redux) that buffers all actions into a queue until a breaker condition is met, at which point the queue is released (i.e. actions are triggered).
 
@@ -19,6 +17,10 @@ let actionBuffer = createActionBuffer(
 ```
 
 #### Redux Persist Example
+##### In short  
+`createActionBuffer(REHYDRATE)`  
+##### for redux-persist@5
+`createActionBuffer({ breaker: REHYDRATE, passthrough: [PERSIST] })`
 ```js
 import {REHYDRATE} from 'redux-persist/constants'
 import createActionBuffer from 'redux-action-buffer'
