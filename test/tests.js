@@ -65,7 +65,12 @@ test('buffers actions except passthrough', t => {
       return {}
     },
     null,
-    applyMiddleware(actionBuffer(BREAKER, breakCallback, ['PASS_THROUGH']))
+    applyMiddleware(
+      actionBuffer(
+        { breaker: BREAKER, passthrough: ['PASS_THROUGH'] },
+        breakCallback
+      )
+    )
   )
 
   let actionp = { type: 'PASS_THROUGH' }
