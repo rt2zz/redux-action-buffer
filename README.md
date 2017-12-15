@@ -17,10 +17,12 @@ let actionBuffer = createActionBuffer(
 ```
 
 #### Redux Persist Example
-##### In short  
-`createActionBuffer(REHYDRATE)`  
-##### for redux-persist@5
+
+**In short:**  
+
 `createActionBuffer({ breaker: REHYDRATE, passthrough: [PERSIST] })`
+
+**Full example:**
 ```js
 import {REHYDRATE} from 'redux-persist/constants'
 import createActionBuffer from 'redux-action-buffer'
