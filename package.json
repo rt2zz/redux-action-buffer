@@ -1,6 +1,6 @@
 {
   "name": "redux-action-buffer",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Buffer redux actions until a breaker condition is met.",
   "main": "index.js",
   "scripts": {
