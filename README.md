@@ -24,7 +24,7 @@ let actionBuffer = createActionBuffer(
 
 **Full example:**
 ```js
-import {REHYDRATE} from 'redux-persist/constants'
+import { REHYDRATE } from 'redux-persist'
 import createActionBuffer from 'redux-action-buffer'
 import { createStore, compose } from 'redux'
 
